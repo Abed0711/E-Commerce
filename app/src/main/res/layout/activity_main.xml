@@ -15,6 +15,7 @@
         android:layout_marginTop="60dp"
         android:src="@drawable/applogo" />
 
+
     <TextView
         android:id="@+id/app_slogan"
         android:layout_width="220dp"

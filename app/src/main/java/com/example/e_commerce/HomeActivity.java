@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.e_commerce.Model.Products;
@@ -166,7 +167,10 @@ public class HomeActivity extends AppCompatActivity
             Intent intent = new Intent(HomeActivity.this, CartActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_orders) {
+        } else if (id == R.id.nav_search) {
+            Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+            startActivity(intent);
+
 
         } else if (id == R.id.nav_categories) {
 
