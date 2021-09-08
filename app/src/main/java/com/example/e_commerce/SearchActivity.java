@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.e_commerce.Model.Products;
 import com.example.e_commerce.ViewHolder.ProductViewHolder;
@@ -23,12 +24,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.rey.material.widget.EditText;
 import com.squareup.picasso.Picasso;
 
+import java.util.Locale;
+
 public class SearchActivity extends AppCompatActivity {
 
     Button buttonSerach ;
     private EditText inputText;
     private RecyclerView searchList;
     private String SearchInput;
+    private String cap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,8 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SearchInput = inputText.getText().toString();
+                cap = SearchInput.substring(0,1).toUpperCase()+SearchInput.substring(1).toLowerCase();
+                Toast.makeText(getApplicationContext(),cap,Toast.LENGTH_SHORT).show();
                 onStart();
 
             }
@@ -57,7 +63,7 @@ public class SearchActivity extends AppCompatActivity {
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Products");
         FirebaseRecyclerOptions<Products> options=
                 new FirebaseRecyclerOptions.Builder<Products>()
-                .setQuery(reference.orderByChild("pname").startAt(SearchInput), Products.class)
+                .setQuery(reference.orderByChild("pname").startAt(cap), Products.class)
                 .build();
         FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter=
                 new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
