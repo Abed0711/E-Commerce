@@ -23,8 +23,8 @@ import java.util.HashMap;
 
 public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
-    private EditText nameEditText, phoneEditText, addressEditText, cityEditText;
-    private Button confirmOrderBtn;
+    private EditText nameEditText, phoneEditText, addressEditText, cityEditText, bKashTrix;
+    private Button confirmOrderBtn, Bkash;
     private String totalAmount = "";
 
     @Override
@@ -37,10 +37,24 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
 
         confirmOrderBtn = (Button) findViewById(R.id.confirm_final_order_btn);
+        Bkash = findViewById(R.id.btnbkash);
         nameEditText = (EditText) findViewById(R.id.shipment_name);
         phoneEditText = (EditText) findViewById(R.id.shipment_phone_number);
         addressEditText = (EditText) findViewById(R.id.shipment_address);
         cityEditText = (EditText) findViewById(R.id.shipment_city);
+        bKashTrix = findViewById(R.id.bkashtrix);
+
+        Bkash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getPackageManager().getLaunchIntentForPackage("com.bKash.customerapp");
+                if (intent != null) {
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(ConfirmFinalOrderActivity.this, "There is no Bkash App, User *247# and give us the trix id", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
 
         confirmOrderBtn.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +105,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("date", saveCurrentDate);
         ordersMap.put("time", saveCurrentTime);
         ordersMap.put("state", "not shipped");
+        ordersMap.put("trixid", bKashTrix.getText().toString().trim());
 
         orderRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

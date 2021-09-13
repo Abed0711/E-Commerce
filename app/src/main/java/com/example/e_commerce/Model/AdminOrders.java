@@ -1,13 +1,13 @@
 package com.example.e_commerce.Model;
 
 public class AdminOrders {
-    private String address, city, date, name, phone, state, time, totalAmount;
+    private String address, city, date, name, phone, state, time, totalAmount,trixid;
 
     public AdminOrders(){
 
     }
 
-    public AdminOrders(String address, String city, String date, String name, String phone, String state, String time, String totalAmount) {
+    public AdminOrders(String address, String city, String date, String name, String phone, String state, String time, String totalAmount,String trixid) {
         this.address = address;
         this.city = city;
         this.date = date;
@@ -16,6 +16,15 @@ public class AdminOrders {
         this.state = state;
         this.time = time;
         this.totalAmount = totalAmount;
+        this.trixid=trixid;
+    }
+
+    public String getTrixid() {
+        return trixid;
+    }
+
+    public void setTrixid(String trixid) {
+        this.trixid = trixid;
     }
 
     public String getAddress() {

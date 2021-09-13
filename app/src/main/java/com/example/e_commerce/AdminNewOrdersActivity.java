@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -57,12 +58,13 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter<AdminOrders, AdminOrdersViewHolder> adapter
                 = new FirebaseRecyclerAdapter<AdminOrders, AdminOrdersViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull AdminOrdersViewHolder holder, final int position, @NonNull final AdminOrders model) {
+            protected void onBindViewHolder(@NonNull AdminOrdersViewHolder holder, @SuppressLint("RecyclerView") final int position, @NonNull final AdminOrders model) {
                 holder.userName.setText("Name: " + model.getName());
                 holder.userPhoneNumber.setText("Phone: " + model.getPhone());
                 holder.userTotalPrice.setText("Total Amount: " + model.getTotalAmount());
                 holder.userDateTime.setText("Order at: " + model.getDate());
                 holder.userState.setText("State: "+model.getState());
+                holder.trixidadmin.setText("Trixid : "+model.getTrixid());
                 holder.userShippingAddress.setText("Shipment Address : " + model.getAddress() + ", " + model.getCity());
 
                 holder.ConfirmOrderBtn.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +129,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
 
     public static class AdminOrdersViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView userName, userPhoneNumber, userTotalPrice, userDateTime, userShippingAddress , userState;
+        public TextView userName, userPhoneNumber, userTotalPrice, userDateTime, userShippingAddress , userState,trixidadmin;
         public Button ShowOrdersBtn;
         public Button ConfirmOrderBtn;
 
@@ -139,6 +141,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
             userDateTime = itemView.findViewById(R.id.order_date_time);
             userShippingAddress = itemView.findViewById(R.id.order_address_city);
             userState = itemView.findViewById(R.id.order_state);
+            trixidadmin=itemView.findViewById(R.id.order_state2);
             ShowOrdersBtn = itemView.findViewById(R.id.show_all_products_btn);
             ConfirmOrderBtn = itemView.findViewById(R.id.confirm_order_btn);
         }
