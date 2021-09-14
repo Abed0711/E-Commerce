@@ -35,6 +35,8 @@ public class CartActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private Button NextProcessBtn;
     private TextView txtTotalAmount, txtMsg1;
+    AlertDialog.Builder builder;
+
 
     private int overTotalPrice = 0;
 
@@ -42,6 +44,8 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
+        builder = new AlertDialog.Builder(this);
 
 
         recyclerView = findViewById(R.id.cart_list);
@@ -58,12 +62,25 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 txtTotalAmount.setText("Total Price = " + String.valueOf(overTotalPrice));
-
-                Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
-                intent.putExtra("Total Price", String.valueOf(overTotalPrice));
-                startActivity(intent);
-                finish();
-
+                builder.setMessage("Totalprice").setTitle("Price");
+                builder.setMessage("Total Price = " + overTotalPrice)
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
+                                intent.putExtra("Total Price", String.valueOf(overTotalPrice));
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.setTitle("Total Price");
+                alert.show();
             }
         });
 

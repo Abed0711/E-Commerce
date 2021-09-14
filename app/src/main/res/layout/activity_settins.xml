@@ -108,7 +108,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/settings_full_name"
-        android:hint="Phone Number..."
+        android:hint="Address..."
         android:textColor="#000"
         android:layout_margin="15dp"
         android:padding="10dp"
